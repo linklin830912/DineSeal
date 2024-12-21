@@ -11,9 +11,7 @@ const ThemeSettingsContext = createContext<ThemeSettingsState | undefined>(undef
 
 // Create a provider component
 export const ThemeSettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [themeSettings, setThemeSettings] = useState<'light' | 'dark'>(
-        localStorage.getItem('theme') as 'light' | 'dark' || 'light'
-    );
+    const [themeSettings, setThemeSettings] = useState<'light' | 'dark'>('light');
 
     useEffect(() => {
     document.documentElement.setAttribute('data-theme', themeSettings);
