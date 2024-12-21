@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary-color: #3cd81d;
+  --secondary-color: #eaaa33;
+
+  --fontMainColor: #051A57;
+  --fontSecondary0Color: #FFFFFF;
+  --fontSecondary1Color: #3538F5;
+  --fontMainHoverColor: #051A57;
+  --fontSecondary0HoverColor: #FFFFFF;
+  --fontSecondary1HoverColor: #3538F5;
+
+  --mainBackgroundLinear0Color: #6C9FD3;
+  --mainBackgroundLinear1Color: #F5F5F5;
+  --mainSvgPath0Color: #4867C1;
+  --mainSvgPath1Color: #FFFFFF;
+  --mainButton0Color: #051A57;
+  --mainButton1Color: #3538F5;
+  --mainButton1SecondaryColor: #DBECFD;
+
+  --pageBackgroundColor: #FFFFFF;
+  --pageBackgroundSecondary0Color: #15313db0;
+  --pageBackgroundSecondary1Color: #DBECFD;
+  --pageBackgroundMaskColor: #3538f589;
+  --pageSvgPath0Color: #8BB8E8;
+  --pageButton0Color: #B7D9FC;
+}
+
+[data-theme='dark'] {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary-color: #1d4ed8;
+  --secondary-color: #9333ea;
+
+  --fontMainColor: #051A57;
+  --fontMainColor: #051A57;
+  --fontMainPaceholderColor: #596a9e;
+  --fontSecondary0Color: #FFFFFF;
+  --fontSecondary1Color: #3538F5;
+  --fontMainHoverColor: #051A57;
+  --fontSecondary0HoverColor: #FFFFFF;
+  --fontSecondary1HoverColor: #3538F5;
+
+  --mainBackgroundLinear0Color: #6C9FD3;
+  --mainBackgroundLinear1Color: #F5F5F5;
+  --mainSvgPath0Color: #4867C1;
+  --mainSvgPath1Color: #FFFFFF;
+  --mainButton0Color: #051A57;
+  --mainButton1Color: #3538F5;
+  --mainButton1SecondaryColor: #DBECFD;
+
+  --pageBackgroundColor: #FFFFFF;
+  --pageBackgroundSecondary0Color: #1E1E1E;
+  --pageBackgroundSecondary1Color: #DBECFD;
+  --pageBackgroundMaskColor: #3538f589;
+  --pageSvgPath0Color: #8BB8E8;
+  --pageButton0Color: #B7D9FC;
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  @apply text-h1 font-bold;
+}
+
+h2 {
+  @apply text-h2 font-semibold;
+}
+
+h3 {
+  @apply text-h3 font-medium;
+}
+h4 {
+  @apply text-h4 font-bold;
+}
+
+h5 {
+  @apply text-h5 font-semibold;
+}
+
+h6 {
+  @apply text-h6 font-medium;
+}
