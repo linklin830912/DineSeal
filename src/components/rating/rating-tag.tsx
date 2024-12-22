@@ -16,7 +16,7 @@ export default function RatingTag(props: RatingTagProps) {
     }
     return <div className="w-full flex flex-col">
         <div className="w-full flex relative flex-col">
-            <input className="w-full border border-s-fontMainColor placeholder:text-fontMainPaceholderColor focus:outline-none focus:border-s-fontMainHoverColor text-h6"
+            <input className="w-full border border-s-fontMainColor px-1 placeholder:text-fontMainPaceholderColor focus:outline-none focus:border-s-fontMainHoverColor text-h6"
                 placeholder="What do you eat?"
                 onFocus={() => { setIsOpen(true) }}
                 onChange={handleInputChange}

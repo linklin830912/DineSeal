@@ -28,10 +28,10 @@ export default function CommentingEditor(props:CommetingEditorProps) {
     }
 
     return <>    
-        <canvas className="w-full rounded-md" ref={canvasRef}/> 
-        <input className='w-full text-fontMainColor placeholder:text-fontMainPaceholderColor text-h5 focus:outline-none focus:ring-0 font-bold'
+        <canvas className="w-full" ref={canvasRef}/> 
+        <input className='w-full mt-2 text-fontMainColor rounded-sm bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h5 focus:outline-none focus:ring-0 mb-1'
             type='text' placeholder='TITLE' onChange={handleTitleChange}/>
-        <textarea className='w-full min-h-[120px] rounded-md text-fontMainColor bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h6 focus:outline-none focus:ring-0'
+        <textarea className='w-full min-h-[120px] rounded-md px-1 text-fontMainColor bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h6 focus:outline-none focus:ring-0'
             placeholder='Caption your memory?' onChange={handleDescriptionChange} />
     </>
 }

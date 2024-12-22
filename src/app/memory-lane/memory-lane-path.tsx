@@ -18,7 +18,14 @@ export default function MemoryLanePath(props: MemoryLanePathProps) {
 
 
     const router = useRouter();
-    const handleNavigation = () => {
+    const handleNavigation = async() => {
+        let webcamStream: MediaStream | null = null;
+        webcamStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (webcamStream) {
+            webcamStream.getTracks().forEach(track => track.stop());
+            webcamStream = null;
+        }
+        
         router?.push('/memory-lane/editor');
     };
     

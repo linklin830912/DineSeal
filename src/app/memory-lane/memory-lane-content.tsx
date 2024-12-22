@@ -1,5 +1,4 @@
 "use client"
-import MemoryLaneProcessbar from './memory-lane-processbar';
 import { MemoryLaneStateEnum, useMemoryLaneState } from '@/context/memory-lane-state-context';
 import MemoryLanePath from './memory-lane-path';
 import MemoryLaneHeader from './memory-lane-header';
@@ -39,9 +38,6 @@ export default function MemoryLaneContent() {
                 <div className='w-[100vw]'>
                     <div className='w-full h-[40px] md:h-[60px]'>
                         <MemoryLaneHeader />
-                    </div>
-                    <div className='w-full flex justify-center items-center'>
-                        <MemoryLaneProcessbar/>
                     </div>
                 </div>   
                 <div></div>

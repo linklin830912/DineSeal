@@ -97,7 +97,7 @@ export default function MemoryLaneEditor() {
                     imageTaken={imageTaken} newCommenting={newCommenting}setNewCommenting={setNewCommenting} />}
                 {editorState === MemoryLaneEditorStateEnum.CONSENT_RIGHTS && <ConsentEditor
                     imageTaken={imageTaken} newCommenting={newCommenting} setNewCommenting={setNewCommenting} setIsAgreed={setIsAgreed} />}
-                {editorState === MemoryLaneEditorStateEnum.DONE && <div className='text-fontSecondary1Color'>
+                {editorState === MemoryLaneEditorStateEnum.DONE && <div className='text-fontSecondary1Color text-h6 text-center'>
                     Thank you. Your feedback is appreciated!
                 </div>}
             </div>
@@ -107,7 +107,7 @@ export default function MemoryLaneEditor() {
                 <button onClick={handleEditorClose}><CrossIcon /></button>
                 {editorState === MemoryLaneEditorStateEnum.MAKE_COMMENTS &&
                     <>
-                        <button className="bg-mainButton1Color rounded-xl ml-5 text-h6 px-5 py-1" onClick={handleShare}>SHARE</button> 
+                        {/* <button className="bg-mainButton1Color rounded-xl ml-5 text-h6 px-5 py-1" onClick={handleShare}>SHARE</button>  */}
                         <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1'onClick={() => { 
                             if(newCommenting.title && newCommenting.description)
                                 setEditorState(MemoryLaneEditorStateEnum.CONSENT_RIGHTS)
@@ -115,7 +115,7 @@ export default function MemoryLaneEditor() {
                         <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1' onClick={() => { 
                             if(newCommenting.title && newCommenting.description)
                                 setEditorState(MemoryLaneEditorStateEnum.MAKE_FEEDBACK)
-                            }}> + POINT </button>
+                            }}> ADD APPRECIATION </button>
                     </>                     
                 }
                 {editorState === MemoryLaneEditorStateEnum.MAKE_FEEDBACK &&

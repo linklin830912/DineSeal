@@ -41,22 +41,22 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
 
     return <>
         
-        <div className="w-full mb-3">
-            <div className="w-full text-fontMainColor text-h6">FEEDBACK</div> 
+        <div className="w-full mb-2">
+            <div className="w-full text-fontMainColor text-h6 mb-1">FEEDBACK</div> 
             <canvas className="w-full rounded-md" ref={canvasRef} /> 
         </div>
         
-        <div className="w-full mb-3">
-            <div className="w-full text-fontMainColor text-h6">RATING</div>
+        <div className="w-full mb-2">
+            <div className="w-full text-fontMainColor text-h6 mb-1">RATING</div>
             <RatingStar totalStars={5} handleStarSelected={handleStarSelected} />
         </div>
-        <div className="w-full mb-3">
-            <div className="w-full text-fontMainColor text-h6">TAGS</div>
+        <div className="w-full mb-0">
+            <div className="w-full text-fontMainColor text-h6 mb-1">TAGS</div>
             <RatingTag values={restaurant?.menu || [] as string[]} handleTagSelected={handleTagSelected}/>
         </div>
         <div className="w-full mb-[-50px]">
-            <div className="w-full text-fontMainColor text-h6">APPRICIATION</div> 
-            <textarea className='w-full min-h-[120px] rounded-md text-fontMainColor bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h6 focus:outline-none focus:ring-0'
+            <div className="w-full text-fontMainColor text-h6 mb-1">APPRICIATION</div> 
+            <textarea className='w-full min-h-[120px] px-1 rounded-md text-fontMainColor bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h6 focus:outline-none focus:ring-0'
                 placeholder='Anything to say to the restaurant owner?' onChange={handleApprciationChange} />
         </div>       
         
