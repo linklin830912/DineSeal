@@ -7,13 +7,12 @@ export function mapToCommentings(data: any) {
             createTime: x.create_time,
             description: x.description,
             appreciation:x.appreciation,
-            photoUrls: x.photo_urls,
             rating: x.rating,
             tags: x.tags,
             diaryId: x.diary_id,
             commentingId: x.commenting_id
         } as Commenting)
     });
-    console.log(commentings);
+    
     return commentings;
 }

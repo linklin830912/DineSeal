@@ -1,6 +1,4 @@
-import { uploadImage } from '@/api/image/uploadImage';
 import React, { useEffect, useRef, useState } from 'react';
-import { blob } from 'stream/consumers';
 enum CameraStateEnum {
   TAKEING_PHOTO,
   PREVIEWING_PHOTO,

@@ -2,7 +2,7 @@
 "use client"
 import MapIcon from '@/components/svg/map-icon';
 import { MemoryLaneStateEnum, useMemoryLaneState } from '@/context/memory-lane-state-context';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CameraEditor from './camera-editor';
 import CrossIcon from '@/components/svg/cross-icon';
 import CommentingEditor from './commenting-editor';
@@ -10,9 +10,10 @@ import { Commenting } from '@/model/Commenting';
 import FeedbackEditor from './feedback-editor';
 import ConsentEditor from './consent-editor';
 import { POST_COMMENTING } from '@/api/comments/postCommentingWithDiaryId';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { uploadImageFromCanvas } from '@/api/image/uploadImage';
 import { useRouter } from 'next/navigation';
+import { GET_IMAGE_ID_BY_COMMENTING_ID } from '@/api/image/getImageIdByCommentingId';
 
 export enum MemoryLaneEditorStateEnum {
     CAMERA,
@@ -29,12 +30,12 @@ export type EditorProp = {
 }
 export default function MemoryLaneEditor() {
     
-    const { restaurant, setState, diaryId, commentings } = useMemoryLaneState();
+    const { restaurant, setState, diaryId } = useMemoryLaneState();
     const [editorState, setEditorState] = useState<MemoryLaneEditorStateEnum>(MemoryLaneEditorStateEnum.CAMERA);
     const [imageTaken, setImageTaken] = useState<HTMLCanvasElement>();
     const [newCommenting, setNewCommenting] = useState<Commenting>({});
     const [isAgreed, setIsAgreed] = useState<boolean>(false);
-
+    const [commentId, setCommentId] = useState<number>(-1);
     const router = useRouter();
 
     const handleEditorClose = () => {
@@ -57,22 +58,39 @@ export default function MemoryLaneEditor() {
             alert("Sharing is not supported on this device/browser.");
         }
     };
-    const [insertCommenting] = useMutation<number, any>(POST_COMMENTING);
+    const [insertCommenting] = useMutation<any, any>(POST_COMMENTING);
+    const [fetchImageId, { data: imageIdData }] = useLazyQuery(GET_IMAGE_ID_BY_COMMENTING_ID);
+
+    useEffect(() => {
+        if (commentId >= 0) { 
+            console.log("comment ID:", commentId);
+            fetchImageId({ variables: { commenting_id: commentId } });
+        }
+    }, [commentId]);
+    useEffect(() => { 
+        if (imageIdData && imageTaken) {
+            const imageId = imageIdData.commenting[0].image_id;
+            uploadImageFromCanvas(`${imageId}.png`, imageTaken);
+        }
+    },[imageIdData])
+
     const handleSubmit = async() => { 
         try {
-            const imageFileName = `${diaryId}-${(commentings?.length || 0) + 1}`;
-            await uploadImageFromCanvas(imageFileName, imageTaken);
-            await insertCommenting({
+            console.log("!!!",diaryId)
+            const result = await insertCommenting({
             variables: {
                 appreciation: newCommenting.appreciation,
-                create_time: new Date().toISOString(), // Properly format the timestamp
+                create_time: new Date().toISOString(),
                 description: newCommenting.description,
                 diary_id: diaryId,
-                photo_urls: [imageFileName],
                 rating: newCommenting.rating || 0,
                 tags: newCommenting.tags || [] ,
                 title: newCommenting.title,
-            }})
+                }
+            })
+            const newCommentId = result.data?.insert_commenting.returning[0].commenting_id;
+            setCommentId(newCommentId);
+            
         } catch(err) { 
             console.error("Error posting comment:", err);
         }
@@ -100,14 +118,12 @@ export default function MemoryLaneEditor() {
                 {editorState === MemoryLaneEditorStateEnum.DONE && <div className='text-fontSecondary1Color text-h6 text-center'>
                     Thank you. Your feedback is appreciated!
                 </div>}
-            </div>
-            
+            </div>            
             
             <div className='w-full mt-5 flex flex-row justify-center items-center'>
                 <button onClick={handleEditorClose}><CrossIcon /></button>
                 {editorState === MemoryLaneEditorStateEnum.MAKE_COMMENTS &&
                     <>
-                        {/* <button className="bg-mainButton1Color rounded-xl ml-5 text-h6 px-5 py-1" onClick={handleShare}>SHARE</button>  */}
                         <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1'onClick={() => { 
                             if(newCommenting.title && newCommenting.description)
                                 setEditorState(MemoryLaneEditorStateEnum.CONSENT_RIGHTS)

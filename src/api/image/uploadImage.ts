@@ -4,14 +4,17 @@ const blobSasUrl = process.env.NEXT_PUBLIC_AZURE_BLOB_SAS_URL!;
 const containerName = process.env.NEXT_PUBLIC_AZURE_STORAGE_CONTAINER_NAME!;
 const imageUrlData = process.env.NEXT_PUBLIC_AZURE_BLOB_SAS_URL_DATA_SAVED!;
 
-export async function uploadImage(newBlobName: string, buffer: Buffer): Promise<string | undefined> { 
+export async function uploadImage(newBlobName: string, buffer: Buffer){ 
   try {
     const blobServiceClient: BlobServiceClient = new BlobServiceClient(blobSasUrl);
-    const containerClient :ContainerClient = blobServiceClient.getContainerClient(containerName);
+    const containerClient: ContainerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient: BlockBlobClient = containerClient.getBlockBlobClient(newBlobName);
-    await blockBlobClient.uploadData(buffer);
-    return `${imageUrlData}${newBlobName}`;
-  } catch {}
+    await blockBlobClient.uploadData(buffer, {
+    blobHTTPHeaders: {
+      blobContentType: "image/png", // Set the Content-Type header
+    },
+  });
+  } catch (e){console.log(e);}
 }
 
 export async function uploadImageFromCanvas(newBlobName: string, canvas:HTMLCanvasElement | undefined) {
