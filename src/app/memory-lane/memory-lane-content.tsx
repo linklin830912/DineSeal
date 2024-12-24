@@ -1,7 +1,7 @@
 "use client"
 import { MemoryLaneStateEnum, useMemoryLaneState } from '@/context/memory-lane-state-context';
 import MemoryLanePath from './memory-lane-path';
-import MemoryLaneHeader from './memory-lane-header';
+import MemoryLaneHeader, { MemoryLaneHeaderStateEnum } from './memory-lane-header';
 import { useEffect, useRef } from 'react';
 import MemoryLaneCount from './memory-lane-count';
 import MemoryLaneReader from './memory-lane-reader';
@@ -22,7 +22,7 @@ export default function MemoryLaneContent() {
         const selectedRestaurant = restaurants?.filter(x => x.restaurantId === Number(e.target.value))[0];
         setRestaurant(selectedRestaurant);
         if (diaryId) {
-            console.log(diaryId);
+            console.log("diaryId",diaryId);
             setDiaryId(diaryId);
             fetchCommentings({ variables: { diaryId: diaryId } });
         }
@@ -37,10 +37,10 @@ export default function MemoryLaneContent() {
 
     return (
         <div className='w-full h-[100vh] relative flex flex-row justify-center items-center bg-gradient-to-b from-mainBackgroundLinear0Color to-mainBackgroundLinear1Color'>
-            <div className='w-full h-[100%] top-0 left-0 absolute grid grid-flow-row grid-rows-[auto_1fr_auto] py-5'>                        
+            <div className='w-full h-full top-0 left-0 absolute grid grid-flow-row grid-rows-[auto_1fr_auto] py-5'>                        
                 <div className='w-[100vw]'>
-                    <div className='w-full h-[40px] md:h-[60px]'>
-                        <MemoryLaneHeader />
+                    <div className='w-full h-auto'>
+                        <MemoryLaneHeader title='MEMORY LANE' state={MemoryLaneHeaderStateEnum.MAIN} goBackRoute='/'/>
                     </div>
                 </div>   
                 <div></div>
@@ -50,7 +50,7 @@ export default function MemoryLaneContent() {
             </div>
             <div className='absolute top-0 left-0 z-20'>
                 {restaurants && <div className='w-full flex justify-center items-center z-100'>
-                    <select  onChange={handleRestaurantIdSelect}>
+                    <select onChange={handleRestaurantIdSelect}>
                         {restaurants.map((x, index) => (
                             <option key={index} value={x.restaurantId}>{x.restaurantName}</option>
                         ))}
@@ -61,9 +61,6 @@ export default function MemoryLaneContent() {
             <div className='w-[100%] h-[100%] overflow-x-auto flex items-center z-10' ref={ touchscreenRef }>
                 <MemoryLanePath />
             </div>
-                
-            {/* {state === MemoryLaneStateEnum.EditComment && <MemoryLaneEditor />}   */}
-            {state === MemoryLaneStateEnum.ReadComment && <MemoryLaneReader/>}
         </div>
     );
 }

@@ -14,6 +14,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import { uploadImageFromCanvas } from '@/api/image/uploadImage';
 import { useRouter } from 'next/navigation';
 import { GET_IMAGE_ID_BY_COMMENTING_ID } from '@/api/image/getImageIdByCommentingId';
+import { mapToCommenting, mapToCommentings } from '@/mapper/mapToCommentings';
 
 export enum MemoryLaneEditorStateEnum {
     CAMERA,
@@ -30,12 +31,12 @@ export type EditorProp = {
 }
 export default function MemoryLaneEditor() {
     
-    const { restaurant, setState, diaryId } = useMemoryLaneState();
+    const { restaurant, setState, diaryId, setCommentings, commentings } = useMemoryLaneState();
     const [editorState, setEditorState] = useState<MemoryLaneEditorStateEnum>(MemoryLaneEditorStateEnum.CAMERA);
     const [imageTaken, setImageTaken] = useState<HTMLCanvasElement>();
-    const [newCommenting, setNewCommenting] = useState<Commenting>({});
+    const [newCommenting, setNewCommenting] = useState<Commenting | undefined>();
     const [isAgreed, setIsAgreed] = useState<boolean>(false);
-    const [commentId, setCommentId] = useState<number>(-1);
+    
     const router = useRouter();
 
     const handleEditorClose = () => {
@@ -59,37 +60,28 @@ export default function MemoryLaneEditor() {
         }
     };
     const [insertCommenting] = useMutation<any, any>(POST_COMMENTING);
-    const [fetchImageId, { data: imageIdData }] = useLazyQuery(GET_IMAGE_ID_BY_COMMENTING_ID);
-
-    useEffect(() => {
-        if (commentId >= 0) { 
-            console.log("comment ID:", commentId);
-            fetchImageId({ variables: { commenting_id: commentId } });
-        }
-    }, [commentId]);
-    useEffect(() => { 
-        if (imageIdData && imageTaken) {
-            const imageId = imageIdData.commenting[0].image_id;
-            uploadImageFromCanvas(`${imageId}.png`, imageTaken);
-        }
-    },[imageIdData])
 
     const handleSubmit = async() => { 
         try {
-            console.log("!!!",diaryId)
+            console.log("submit diaryId ", diaryId)
+            if (diaryId < 0) return;
             const result = await insertCommenting({
             variables: {
-                appreciation: newCommenting.appreciation,
+                appreciation: newCommenting?.appreciation,
                 create_time: new Date().toISOString(),
-                description: newCommenting.description,
+                description: newCommenting?.description,
                 diary_id: diaryId,
-                rating: newCommenting.rating || 0,
-                tags: newCommenting.tags || [] ,
-                title: newCommenting.title,
+                rating: newCommenting?.rating || 0,
+                tags: newCommenting?.tags || [] ,
+                title: newCommenting?.title,
                 }
             })
-            const newCommentId = result.data?.insert_commenting.returning[0].commenting_id;
-            setCommentId(newCommentId);
+            console.log("result ", result)
+            const resultComment = result.data?.insert_commenting.returning[0];
+            if (resultComment?.image_id && imageTaken) {
+                uploadImageFromCanvas(`${resultComment?.image_id}.png`, imageTaken);
+                setCommentings([...commentings || [], mapToCommenting(resultComment)])
+            }
             
         } catch(err) { 
             console.error("Error posting comment:", err);
@@ -125,11 +117,11 @@ export default function MemoryLaneEditor() {
                 {editorState === MemoryLaneEditorStateEnum.MAKE_COMMENTS &&
                     <>
                         <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1'onClick={() => { 
-                            if(newCommenting.title && newCommenting.description)
+                            if(newCommenting?.title && newCommenting?.description)
                                 setEditorState(MemoryLaneEditorStateEnum.CONSENT_RIGHTS)
                             }}> SAVE </button>
                         <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1' onClick={() => { 
-                            if(newCommenting.title && newCommenting.description)
+                            if(newCommenting?.title && newCommenting?.description)
                                 setEditorState(MemoryLaneEditorStateEnum.MAKE_FEEDBACK)
                             }}> ADD APPRECIATION </button>
                     </>                     
@@ -137,7 +129,7 @@ export default function MemoryLaneEditor() {
                 {editorState === MemoryLaneEditorStateEnum.MAKE_FEEDBACK &&
                     <button className='bg-mainButton1Color rounded-xl ml-5 text-h6 px-5 py-1'
                         onClick={() => { 
-                            if(newCommenting.appreciation)
+                            if(newCommenting?.appreciation)
                                 setEditorState(MemoryLaneEditorStateEnum.CONSENT_RIGHTS)
                             }}
                     > SAVE </button>

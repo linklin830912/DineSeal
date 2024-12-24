@@ -16,9 +16,9 @@ interface MemoryLaneState {
     restaurant: Restaurant | undefined,
     setRestaurant: (restaurant: Restaurant | undefined) => void,
     commentings?: Commenting[] | undefined
-    setCommentings: (comments: Commenting[] | undefined) => void
-    diaryId?: number | undefined,
-    setDiaryId: (diaryId: number | undefined) => void
+    setCommentings: (comments: Commenting[]) => void
+    diaryId: number,
+    setDiaryId: (diaryId: number) => void
     theme: ThemeSettings
     setTheme:(theme: ThemeSettings) => void
 }
@@ -30,8 +30,8 @@ const MemoryLaneStateContext = createContext<MemoryLaneState | undefined>(undefi
 export const MemoryLaneStateProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, setState] = useState<MemoryLaneStateEnum>(MemoryLaneStateEnum.BrowseComments);
   const [restaurant, setRestaurant] = useState<Restaurant | undefined>();
-  const [commentings, setCommentings] = useState<Commenting[] | undefined>();
-  const [diaryId, setDiaryId] = useState<number | undefined>();
+  const [commentings, setCommentings] = useState<Commenting[]>([]);
+  const [diaryId, setDiaryId] = useState<number>(-1);
   const initTheme = themeSwitch(CustomerSettingsThemeEnum.LIGHT);
   const [theme, setTheme] = useState<ThemeSettings>(initTheme);
 

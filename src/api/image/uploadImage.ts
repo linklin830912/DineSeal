@@ -9,17 +9,21 @@ export async function uploadImage(newBlobName: string, buffer: Buffer){
     const blobServiceClient: BlobServiceClient = new BlobServiceClient(blobSasUrl);
     const containerClient: ContainerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient: BlockBlobClient = containerClient.getBlockBlobClient(newBlobName);
-    await blockBlobClient.uploadData(buffer, {
+    const result = await blockBlobClient.uploadData(buffer, {
     blobHTTPHeaders: {
       blobContentType: "image/png", // Set the Content-Type header
-    },
-  });
+      },
+    });
+    console.log("image uploaded status: ", result._response.status)
   } catch (e){console.log(e);}
 }
 
 export async function uploadImageFromCanvas(newBlobName: string, canvas:HTMLCanvasElement | undefined) {
-   if(canvas)canvas.toBlob(async(blob) => { 
-        if (blob) { 
+  console.log("uploading") 
+  if (canvas) canvas.toBlob(async (blob) => { 
+    console.log("blob ", blob) 
+     if (blob) { 
+          
           const arrayBuffer = await blob.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
           uploadImage(newBlobName, buffer);

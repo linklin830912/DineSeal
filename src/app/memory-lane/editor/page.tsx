@@ -6,13 +6,11 @@ import { client } from '@/apollo/client';
 import MemoryLaneEditor from './memory-lane-editor';
 
 
-export default function MemoryLaneEditorPage() {
-    
+export default function MemoryLaneEditorPage() {    
     
     return (
         <ApolloProvider client={client}> 
            <MemoryLaneEditor/>
-        </ApolloProvider> 
-             
+        </ApolloProvider>              
     );
 }

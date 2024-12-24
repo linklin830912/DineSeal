@@ -38,12 +38,12 @@ export default {
         pageButton0Color: 'var(--pageButton0Color)',
       },
       fontSize: {
-        'h1': '2.5rem', // Example: 40px
-        'h2': '1.875rem', // Example: 36px
-        'h3': '1.25rem', // Example: 32px
-        'h4': '0.875rem', 
-        'h5': '0.8125rem',
-        'h6': '0.75rem',
+        'h1': '2.5rem',
+        'h2': '1.875rem',
+        'h3': '1.25rem',
+        'h4': '0.8rem', 
+        'h5': '0.72rem',
+        'h6': '0.6rem',
       },
       fontFamily: {
         dmsans: ['DM Sans', 'sans-serif']

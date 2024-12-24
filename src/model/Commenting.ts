@@ -1,11 +1,11 @@
 export type Commenting = {
-    title?: string;
+    title: string;
     createTime?: string;
-    description?: string;
-    photoUrls?:string[];
+    description: string;
+    imageId?:string;
     rating?:number;
     tags?:number[];
-    diaryId?: number;
+    diaryId: number;
     commentingId?: number;
     appreciation?:string;
 }

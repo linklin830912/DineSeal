@@ -44,8 +44,9 @@ export function getDiarysAndRestaurantByEmail(email: string) {
   const [fetchRestaurants, { data: restaurantsData }] =
     useLazyQuery(GET_RESTAURANTS_BY_IDS);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (userData) { 
+      
       const user = mapToUser(userData) as User;
       fetchDiary({variables: {
             userUuid: user.userId
