@@ -1,7 +1,7 @@
 export type Commenting = {
-    title: string;
+    title?: string;
     createTime?: string;
-    description: string;
+    description?: string;
     imageId?:string;
     rating?:number;
     tags?:number[];

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { EditorProp } from "./memory-lane-editor";
+import { Commenting } from "@/model/Commenting";
 
 type CommetingEditorProps = EditorProp;
 export default function CommentingEditor(props:CommetingEditorProps) { 
@@ -18,12 +19,12 @@ export default function CommentingEditor(props:CommetingEditorProps) {
 
     const handleTitleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value) { 
-            if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, title: e.target.value});
+            if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, title: e.target.value}as Commenting);
         }
     }
     const handleDescriptionChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => { 
         if (e.target.value) { 
-            if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, description: e.target.value});
+            if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, description: e.target.value}as Commenting);
     }
     }
 

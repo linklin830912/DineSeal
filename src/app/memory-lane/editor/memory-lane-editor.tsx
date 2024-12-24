@@ -27,7 +27,7 @@ export enum MemoryLaneEditorStateEnum {
 export type EditorProp = {
     imageTaken?: HTMLCanvasElement,
     newCommenting?: Commenting,
-    setNewCommenting?:(commenting: Commenting)=>void
+    setNewCommenting?:(commenting: Commenting | undefined)=>void
 }
 export default function MemoryLaneEditor() {
     

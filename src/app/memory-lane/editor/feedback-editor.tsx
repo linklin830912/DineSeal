@@ -4,6 +4,7 @@ import { useMemoryLaneState } from "@/context/memory-lane-state-context";
 import RatingTag from "@/components/rating/rating-tag";
 import { EditorProp } from "./memory-lane-editor";
 import Badge from "@/components/svg/badge";
+import { Commenting } from "@/model/Commenting";
 
 type FeedbackEditorProps = EditorProp;
 export default function FeedbackEditor(props: FeedbackEditorProps) {
@@ -24,10 +25,10 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
     }, [props.imageTaken]);
 
     const handleApprciationChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
-        if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, appreciation: e.target.value})
+        if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, appreciation: e.target.value}as Commenting)
     }
     const handleStarSelected = (x: number) => {
-        if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, rating: x})
+        if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, rating: x} as Commenting)
     }
     const handleTagSelected = (tags: string[]) => {
         const tagIndexs = [] as number[];
@@ -36,7 +37,7 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
                 if (tag === x) tagIndexs.push(index);
             });
         });
-        if(props.setNewCommenting)props.setNewCommenting({ ...props.newCommenting, tags: tagIndexs})
+        if(props.setNewCommenting)props.setNewCommenting({ ...props.newCommenting, tags: tagIndexs} as Commenting)
     }
 
     return <>
