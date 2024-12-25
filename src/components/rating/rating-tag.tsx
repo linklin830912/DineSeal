@@ -1,4 +1,3 @@
-import { validate } from "graphql";
 import React, { useEffect, useState } from "react";
 type RatingTagProps = {
     values: string[];

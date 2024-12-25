@@ -9,7 +9,7 @@ import { getDiarysAndRestaurantByEmail} from '@/api/user/getDiarysAndRestaurantB
 import { GET_COMMENTS_BY_DIARY_ID } from '@/api/comments/getCommentsByDiaryId';
 import { mapToCommentings } from '@/mapper/mapToCommentings';
 export default function MemoryLaneContent() { 
-    const { commentings, setCommentings, setRestaurant, setDiaryId, restaurant } = useMemoryLaneState();
+    const { setCommentings, setRestaurant, setDiaryId, restaurant } = useMemoryLaneState();
     const touchscreenRef = useRef<HTMLDivElement>(null);
 
     const { diarys, restaurants } = getDiarysAndRestaurantByEmail("link.customer0@mail.com");
@@ -43,7 +43,7 @@ export default function MemoryLaneContent() {
                 </div>   
                 <div></div>
                 <div className='w-full flex justify-center items-center mt-5'>
-                    <MemoryLaneCount commentingCount={commentings?.length || 0} />                    
+                    <MemoryLaneCount />                    
                 </div> 
             </div>
             <div className='absolute top-0 left-0 z-20'>
@@ -56,7 +56,7 @@ export default function MemoryLaneContent() {
                 </div>}
             </div>
         
-            <div className='w-[100%] h-[100%] overflow-x-auto flex items-center z-10' ref={ touchscreenRef }>
+            <div className='w-full h-full overflow-x-auto flex items-center z-10' ref={ touchscreenRef }>
                 <MemoryLanePath />
             </div>
         </div>

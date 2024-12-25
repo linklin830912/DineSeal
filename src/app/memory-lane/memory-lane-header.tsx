@@ -35,7 +35,7 @@ export default function MemoryLaneHeader(props: MemoryLaneHeaderProps) {
                              
             </div>
             <div className='w-full flex justify-center items-center'>
-                <LineProcessbar totalSteps={10} currentStep={commentings?.length || 0}/>
+                <LineProcessbar totalSteps={10} currentStep={(commentings?.length || 0)%10}/>
             </div>
         </div>
     ); 

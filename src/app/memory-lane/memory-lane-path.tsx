@@ -2,8 +2,9 @@ import SegmentSVGPath from '@/components/memory-lane/segment-svg-path';
 import StartSVGPath from '@/components/memory-lane/start-svg-path';
 import { MemoryLaneStateEnum, useMemoryLaneState } from '@/context/memory-lane-state-context';
 import { useTouchScreen } from '@/context/touch-screen-context';
+import { Commenting } from '@/model/Commenting';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type MemoryLanePathProps = {
     
@@ -11,6 +12,8 @@ type MemoryLanePathProps = {
 export default function MemoryLanePath(props: MemoryLanePathProps) { 
     const { setState, commentings } = useMemoryLaneState();
     const { positionXs, setPositionXs } = useTouchScreen();
+    const [filteredCommentings, setFilteredCommentings] = useState<Commenting[]>([]);
+
     const handleSetPositionXs = (value:number) => { 
         const newPositionXs = [...positionXs, value];
         setPositionXs(newPositionXs);
@@ -29,13 +32,17 @@ export default function MemoryLanePath(props: MemoryLanePathProps) {
         router?.push('/memory-lane/editor');
     };
     
+    useEffect(() => { 
+        const comments = commentings ?? [] as Commenting[];
+        setFilteredCommentings(comments.filter((x, index)=>((comments.length-1)-(comments.length%10))<index))
+    },[commentings])
 
 
 
     return (
         <div className='w-full h-full'>
-            <div className='flex flex-row h-[100%] flex-nowrap relative items-center px-[50%]' >             
-            { commentings && commentings.map((cmmt, index) => <div key={index}>{
+            <div className='flex flex-row h-full flex-nowrap relative items-center px-[50%]' >             
+            { filteredCommentings.map((cmmt, index) => <div key={index}>{
                 index === 0 ? <StartSVGPath comment={cmmt} hasData
                             setPositionX={handleSetPositionXs}
                             handleButtonClick={() => { 
@@ -56,15 +63,15 @@ export default function MemoryLanePath(props: MemoryLanePathProps) {
                     }</>
                 }</div>)
             }
-            {commentings && <div className="mr-[-120px]"> { 
-                commentings?.length === 0 ?
+            {filteredCommentings && <div className="mr-[-120px]"> { 
+                filteredCommentings?.length === 0 ?
                     <StartSVGPath hasData={false}
                         setPositionX={handleSetPositionXs}
                         handleButtonClick={() => { 
                             setState(MemoryLaneStateEnum.EditComment);
                             handleNavigation();
                     }} />
-                    : <> {commentings?.length % 2 === 1 ?
+                    : <> {filteredCommentings.length % 2 === 1 ?
                         <SegmentSVGPath hasData={false} isFlipped
                             setPositionX={handleSetPositionXs}
                             handleButtonClick={() => { 

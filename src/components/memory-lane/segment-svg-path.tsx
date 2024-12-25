@@ -1,4 +1,3 @@
-import { Commenting } from '@/model/Commenting';
 import React, { useEffect, useRef } from 'react';
 import { StartSVGPathProps } from './start-svg-path';
 type SegmentSVGPathProps = {
@@ -14,7 +13,7 @@ export default function SegmentSVGPath(props: SegmentSVGPathProps) {
     return (
         <>        
             {props.isFlipped ?
-                <div className={`relative h-[100%] ml-[-50px] left-[-60px]`}>
+                <div className={`relative h-full ml-[-50px] left-[-60px]`}>
                 <svg preserveAspectRatio="xMidYMid slice" height={"300px"} xmlns="http://www.w3.org/2000/svg" viewBox="600 0 470 451.34">
                     <path id="path1" className='stroke-mainSvgPath0Color pointer-events-none' strokeOpacity="0.27" strokeWidth="40" fillOpacity={0}
                         d="M618.38,384.73c83.37.63,167.15-51.09,183.86-155.22C818.84,126,901.78,74.64,984.72,75" />
@@ -29,7 +28,7 @@ export default function SegmentSVGPath(props: SegmentSVGPathProps) {
                         <rect x={930} y={0} width={150} height={150} className="cursor-pointer" fill='transparent' onClick={props.handleButtonClick}/>
                     </svg>
                     
-                </div> : <div className={`relative h-[100%] ml-[-50px] left-[-60px]`}>
+                </div> : <div className={`relative h-full ml-[-50px] left-[-60px]`}>
                     <svg preserveAspectRatio="xMidYMid slice" height={"300px"} xmlns="http://www.w3.org/2000/svg" viewBox="990 0 475 451.34">
                         <path id="path2" className='stroke-mainSvgPath0Color pointer-events-none' strokeOpacity="0.27" strokeWidth="40" fillOpacity={0}
                             d="M1007.06,73.36c82.94.36,165.88,52.46,182.53,155.94,17.19,107.17,105.36,159.37,191.18,156.21" />

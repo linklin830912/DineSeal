@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import RatingStar from "@/components/rating/rating-star";
 import { useMemoryLaneState } from "@/context/memory-lane-state-context";
 import RatingTag from "@/components/rating/rating-tag";

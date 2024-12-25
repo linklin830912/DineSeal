@@ -1,5 +1,3 @@
-import { Commenting } from "./Commenting";
-
 export type Restaurant = {
     restaurantId: number;
     restaurantName: string;

@@ -11,7 +11,7 @@ export default function CameraEditor(props:CameraEditorProps) {
     const [isCameraOff, setIsCameraOff] = useState<boolean>(true);   
 
     return <>        
-        <div className='w-[100%] py-20 rounded-xl bg-pageBackgroundSecondary0Color flex flex-col justify-center items-center'
+        <div className='w-full py-20 rounded-xl bg-pageBackgroundSecondary0Color flex flex-col justify-center items-center'
             onClick={()=>setIsCameraOff(false)}>
             <EmptyIcon />
             <div className="text-fontSecondary0Color text-center text-h6 font-medium mt-3">Take a picture of your meal!</div>

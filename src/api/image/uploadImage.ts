@@ -2,7 +2,6 @@ import { BlobServiceClient, BlockBlobClient, ContainerClient } from '@azure/stor
 
 const blobSasUrl = process.env.NEXT_PUBLIC_AZURE_BLOB_SAS_URL!;
 const containerName = process.env.NEXT_PUBLIC_AZURE_STORAGE_CONTAINER_NAME!;
-const imageUrlData = process.env.NEXT_PUBLIC_AZURE_BLOB_SAS_URL_DATA_SAVED!;
 
 export async function uploadImage(newBlobName: string, buffer: Buffer){ 
   try {
