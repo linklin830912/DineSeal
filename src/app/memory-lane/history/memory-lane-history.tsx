@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 import MemoryLaneHeader, { MemoryLaneHeaderStateEnum } from "../memory-lane-header"
 import { useMemoryLaneState } from "@/context/memory-lane-state-context";
 import { Commenting } from "@/model/Commenting";

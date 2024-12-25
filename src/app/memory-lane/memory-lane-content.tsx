@@ -1,16 +1,15 @@
 "use client"
-import { MemoryLaneStateEnum, useMemoryLaneState } from '@/context/memory-lane-state-context';
+import { useMemoryLaneState } from '@/context/memory-lane-state-context';
 import MemoryLanePath from './memory-lane-path';
 import MemoryLaneHeader, { MemoryLaneHeaderStateEnum } from './memory-lane-header';
 import { useEffect, useRef } from 'react';
 import MemoryLaneCount from './memory-lane-count';
-import MemoryLaneReader from './memory-lane-reader';
 import { useLazyQuery} from '@apollo/client';
 import { getDiarysAndRestaurantByEmail} from '@/api/user/getDiarysAndRestaurantByEmail';
 import { GET_COMMENTS_BY_DIARY_ID } from '@/api/comments/getCommentsByDiaryId';
 import { mapToCommentings } from '@/mapper/mapToCommentings';
 export default function MemoryLaneContent() { 
-    const { state, commentings, setCommentings, setRestaurant, setDiaryId } = useMemoryLaneState();
+    const { commentings, setCommentings, setRestaurant, setDiaryId, restaurant } = useMemoryLaneState();
     const touchscreenRef = useRef<HTMLDivElement>(null);
 
     const { diarys, restaurants } = getDiarysAndRestaurantByEmail("link.customer0@mail.com");
@@ -22,7 +21,6 @@ export default function MemoryLaneContent() {
         const selectedRestaurant = restaurants?.filter(x => x.restaurantId === Number(e.target.value))[0];
         setRestaurant(selectedRestaurant);
         if (diaryId) {
-            console.log("diaryId",diaryId);
             setDiaryId(diaryId);
             fetchCommentings({ variables: { diaryId: diaryId } });
         }
@@ -50,7 +48,7 @@ export default function MemoryLaneContent() {
             </div>
             <div className='absolute top-0 left-0 z-20'>
                 {restaurants && <div className='w-full flex justify-center items-center z-100'>
-                    <select onChange={handleRestaurantIdSelect}>
+                    <select onChange={handleRestaurantIdSelect} defaultValue={restaurant?.restaurantId}>
                         {restaurants.map((x, index) => (
                             <option key={index} value={x.restaurantId}>{x.restaurantName}</option>
                         ))}

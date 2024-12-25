@@ -38,11 +38,15 @@ export const MemoryLaneStateProvider: React.FC<{ children: ReactNode }> = ({ chi
   useEffect(() => {
     const storedRestaurantData = localStorage.getItem('restaurant');
     const storedCommentingsData = localStorage.getItem('commentings');
+    const storedDiaryIdData = localStorage.getItem('diaryId');
     if (storedRestaurantData) {
       setRestaurant(JSON.parse(storedRestaurantData) as Restaurant);
     }
     if (storedCommentingsData) { 
       setCommentings(JSON.parse(storedCommentingsData) as Commenting[]);
+    }
+    if (storedDiaryIdData) { 
+      setDiaryId(JSON.parse(storedDiaryIdData) as number);
     }
   }, []);
 
@@ -54,10 +58,17 @@ export const MemoryLaneStateProvider: React.FC<{ children: ReactNode }> = ({ chi
 
   useEffect(() => { 
     if (commentings) { 
+      console.log("commentings.length", commentings.length);
       localStorage.setItem('commentings', JSON.stringify(commentings));
     }
   }, [commentings])
 
+  useEffect(() => { 
+    if (diaryId) {
+      localStorage.setItem('diaryId', JSON.stringify(diaryId));
+    }
+  }, [commentings])
+  
   return (
     <MemoryLaneStateContext.Provider value={{
       state: state,
@@ -76,7 +87,6 @@ export const MemoryLaneStateProvider: React.FC<{ children: ReactNode }> = ({ chi
   );
 };
 
-// Hook to use the Counter context
 export const useMemoryLaneState = (): MemoryLaneState => {
   const context = useContext(MemoryLaneStateContext);
   if (!context) {
