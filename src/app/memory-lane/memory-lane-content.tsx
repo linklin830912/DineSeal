@@ -16,7 +16,6 @@ export default function MemoryLaneContent() {
 
     const [fetchCommentings, { data: commentingData }] = useLazyQuery(GET_COMMENTS_BY_DIARY_ID);
     const handleRestaurantIdSelect = (e: React.ChangeEvent<HTMLSelectElement>) => { 
-        console.log("e.target.value ", e.target.value)
         const diaryId = diarys?.filter(x => x.restaurantId === Number(e.target.value)).map(x => x.diaryId)[0];
         const selectedRestaurant = restaurants?.filter(x => x.restaurantId === Number(e.target.value))[0];
         setRestaurant(selectedRestaurant);
@@ -27,7 +26,6 @@ export default function MemoryLaneContent() {
     }
     useEffect(() => { 
         if (commentingData) {
-            console.log("commentingData ",commentingData);
             const newCommentings = mapToCommentings(commentingData);
             setCommentings(newCommentings);
         }

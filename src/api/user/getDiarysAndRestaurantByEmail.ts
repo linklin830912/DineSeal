@@ -22,10 +22,9 @@ query getDiaryUserIdByEmail($email: bpchar!) {
 }`
 
 const GET_DIARY_BY_USER_UUID = gql`
-query getDiaryByUserId($userUuid: uuid = "") {
+query getDiaryByUserId($userUuid: uuid) {
   diary(where: {is: {id: {_eq: $userUuid}}}) {
     diary_id
-    theme_setting
     restaurant_id
   }
 }`
@@ -45,8 +44,7 @@ export function getDiarysAndRestaurantByEmail(email: string) {
     useLazyQuery(GET_RESTAURANTS_BY_IDS);
 
   useEffect(() => {
-    if (userData) { 
-      
+    if (userData) {
       const user = mapToUser(userData) as User;
       fetchDiary({variables: {
             userUuid: user.userId
@@ -55,6 +53,7 @@ export function getDiarysAndRestaurantByEmail(email: string) {
   }, [userData])
 
   const diarys = useMemo<Diary[] | undefined>(() => {
+    
     if (diaryData) {
       const diarys = mapToDiarys(diaryData) as Diary[];
       const restaurantIds = diarys.map(x => x.restaurantId);      

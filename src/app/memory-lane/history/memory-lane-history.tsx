@@ -26,7 +26,7 @@ export default function MemoryLaneHistory() {
                     }}/>
             </div>}
             <div className='w-full h-auto flex justify-center items-center mt-5'>
-                <MemoryLaneCount commentingCount={commentings?.length || 0} />                    
+                <MemoryLaneCount/>                    
             </div> 
         </div>
     </div>
