@@ -36,6 +36,20 @@ export default {
         pageBackgroundMaskColor: 'var(--pageBackgroundMaskColor)',
         pageSvgPath0Color: 'var(--pageSvgPath0Color)',
         pageButton0Color: 'var(--pageButton0Color)',
+/////////////////
+        backgroundColor0: 'var(--backgroundColor0)',
+        backgroundColor1: 'var(--backgroundColor1)',
+        backgroundColor2: 'var(--backgroundColor2)',
+        buttonColor0: 'var(--buttonColor0)',
+        buttonColor1: 'var(--buttonColor1)',
+        buttonColor2: 'var(--buttonColor2)',
+        svgFillColor0: 'var(--svgFillColor0)',
+        svgFillColor1: 'var(--svgFillColor1)',
+        svgStrokeColor0: 'var(--svgStrokeColor0)',
+        svgStrokeColor1: 'var(--svgStrokeColor1)',
+        fontColor0: 'var(--fontColor0)',
+        fontColor1: 'var(--fontColor1)',
+        
       },
       fontSize: {
         'h1': '2.5rem',

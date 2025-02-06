@@ -1,124 +1,55 @@
-import { CustomerSettingsThemeEnum } from "@/model/CustomerSettings";
+import { ColorThemeSettingsEnum } from "@/model/enum/ColorThemeSettingsEnum";
+import { ColorThemeSettings } from "@/model/theme/ColorThemeSettings";
 
-export function themeSwitch(themeEnum: CustomerSettingsThemeEnum): ThemeSettings { 
-    
+export function themeSwitch(themeEnum: ColorThemeSettingsEnum): ColorThemeSettings {    
     
     switch (themeEnum) { 
-        case CustomerSettingsThemeEnum.LIGHT:
+        case ColorThemeSettingsEnum.DARK:
             return {
-                color: {
-                    font: {
-                        fontMainColor: "#051A57",
-                        fontSecondary0Color: "#FFFFFF",
-                        fontSecondary1Color: "#3538F5",
-                        fontMainHoverColor: "#051A57",
-                        fontSecondary0HoverColor: "#FFFFFF",
-                        fontSecondary1HoverColor: "#3538F5"
-                    },
-                    main: {
-                        backgroundLinear0Color: "#6C9FD3",
-                        backgroundLinear1Color: "#F5F5F5",
-                        svgPath0Color: "#4867C1",
-                        svgPath1Color: "#FFFFFF",
-                        button0Color: "#051A57",
-                        button1Color: "#3538F5",
-                        button1SecondaryColor: "#DBECFD",
-                    },
-                    page: {
-                        backgroundColor: "#FFFFFF",
-                        backgroundSecondary0Color: "#1E1E1E",
-                        backgroundSecondary1Color: "#DBECFD",
-                        svgPath0Color: "#8BB8E8",
-                        button0Color: "#B7D9FC"
-                    }
-                }
-            };
-        case CustomerSettingsThemeEnum.DARK:
+                        backgroundColor0: "#001433",
+                        backgroundColor1: "#3d5f94",
+                        backgroundColor2: "#d6e6ff",
+                        buttonColor0: "#4675bd",
+                        buttonColor1: "#134694",
+                        buttonColor2: "#46628c",
+                        svgFillColor0: "#97bffc",
+                        svgFillColor1: "#6b97db",
+                        svgStrokeColor0: "#132c54",
+                        svgStrokeColor1: "#799fdb",
+                        fontColor0: "#ffffff",
+                        fontColor1: "#001433",
+                    };
+        case ColorThemeSettingsEnum.DREAM:
             return {
-                color: {
-                    font: {
-                        fontMainColor: "#051A57",
-                        fontSecondary0Color: "#FFFFFF",
-                        fontSecondary1Color: "#3538F5",
-                        fontMainHoverColor: "#051A57",
-                        fontSecondary0HoverColor: "#FFFFFF",
-                        fontSecondary1HoverColor: "#3538F5"
-                    },
-                    main: {
-                        backgroundLinear0Color: "#6C9FD3",
-                        backgroundLinear1Color: "#F5F5F5",
-                        svgPath0Color: "#4867C1",
-                        svgPath1Color: "#FFFFFF",
-                        button0Color: "#051A57",
-                        button1Color: "#3538F5",
-                        button1SecondaryColor: "#DBECFD",
-                    },
-                    page: {
-                        backgroundColor: "#FFFFFF",
-                        backgroundSecondary0Color: "#1E1E1E",
-                        backgroundSecondary1Color: "#DBECFD",
-                        svgPath0Color: "#8BB8E8",
-                        button0Color: "#B7D9FC"
-                    }
-                }
-            };
-        case CustomerSettingsThemeEnum.CITY:
+                        backgroundColor0: "#f6bdff",
+                        backgroundColor1: "#a0dce8",
+                        backgroundColor2: "#fffef0",
+                        buttonColor0: "#84c4c1",
+                        buttonColor1: "#b33fe0",
+                        buttonColor2: "#dedcb1",
+                        svgFillColor0: "#f9edff",
+                        svgFillColor1: "#ccb3f5",
+                        svgStrokeColor0: "#653d94",
+                        svgStrokeColor1: "#b2a5c7",
+                        fontColor0: "#ffffff",
+                        fontColor1: "#183236",
+                    };
+        default: // LIGHT
             return {
-                color: {
-                    font: {
-                        fontMainColor: "#051A57",
-                        fontSecondary0Color: "#FFFFFF",
-                        fontSecondary1Color: "#3538F5",
-                        fontMainHoverColor: "#051A57",
-                        fontSecondary0HoverColor: "#FFFFFF",
-                        fontSecondary1HoverColor: "#3538F5"
-                    },
-                    main: {
-                        backgroundLinear0Color: "#6C9FD3",
-                        backgroundLinear1Color: "#F5F5F5",
-                        svgPath0Color: "#4867C1",
-                        svgPath1Color: "#FFFFFF",
-                        button0Color: "#051A57",
-                        button1Color: "#3538F5",
-                        button1SecondaryColor: "#DBECFD",
-                    },
-                    page: {
-                        backgroundColor: "#FFFFFF",
-                        backgroundSecondary0Color: "#1E1E1E",
-                        backgroundSecondary1Color: "#DBECFD",
-                        svgPath0Color: "#8BB8E8",
-                        button0Color: "#B7D9FC"
-                    }
-                }
-            };
-        default:
-            return {
-                color: {
-                    font: {
-                        fontMainColor: "#051A57",
-                        fontSecondary0Color: "#FFFFFF",
-                        fontSecondary1Color: "#3538F5",
-                        fontMainHoverColor: "#051A57",
-                        fontSecondary0HoverColor: "#FFFFFF",
-                        fontSecondary1HoverColor: "#3538F5"
-                    },
-                    main: {
-                        backgroundLinear0Color: "#6C9FD3",
-                        backgroundLinear1Color: "#F5F5F5",
-                        svgPath0Color: "#4867C1",
-                        svgPath1Color: "#FFFFFF",
-                        button0Color: "#051A57",
-                        button1Color: "#3538F5",
-                        button1SecondaryColor: "#DBECFD",
-                    },
-                    page: {
-                        backgroundColor: "#FFFFFF",
-                        backgroundSecondary0Color: "#1E1E1E",
-                        backgroundSecondary1Color: "#DBECFD",
-                        svgPath0Color: "#8BB8E8",
-                        button0Color: "#B7D9FC"
-                    }
-                }
-            };
+                        backgroundColor0: "#bfb793",
+                        backgroundColor1: "#ffed9c",
+                        backgroundColor2: "#ffffff",
+                        buttonColor0: "#a18300",
+                        buttonColor1: "#d1ab02",
+                        buttonColor2: "#c9c7b3",
+
+                        svgFillColor0: "#bfaf21",
+                        svgFillColor1: "#fff700",
+                        svgStrokeColor0: "#a18300",
+                        svgStrokeColor1: "white",
+
+                        fontColor0: "#ffffff",
+                        fontColor1: "#403c22",
+                    };
     }
 }

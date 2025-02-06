@@ -28,7 +28,7 @@ export default function MemoryLaneHeader(props: MemoryLaneHeaderProps) {
             <div className='w-full flex flex-row justify-between items-start relative'>
                 <button className='w-[25px] pt-1'
                     onClick={handleGoBack}><PrevPageArrowButton /></button>            
-                <div className='text-h4 text-fontMainColor mt-1'>{props.title}</div>
+                <div className='text-h4 text-fontColor0 mt-1'>{props.title}</div>
                 
                 <button className={`w-[20px] ${props.state === MemoryLaneHeaderStateEnum.MAIN ? "" : "opacity-0"}`}
                     onClick={handleGoToHistory}><MenuIcon /></button> 

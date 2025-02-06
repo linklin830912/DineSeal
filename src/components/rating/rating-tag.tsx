@@ -23,7 +23,7 @@ export default function RatingTag(props: RatingTagProps) {
         {isOpen && <ul className="absolute w-full bg-pageBackgroundSecondary1Color top-[20px] text-h5">{
             validValues.map((x, index) => <li className="w-full"
                 key={index}  ><button value={x}
-                    className="w-full pl-1 py-1 text-fontMainColor text-left text-h5"
+                    className="w-full pl-1 py-1 text-fontColor0 text-left text-h5"
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                         setTags([...tags, x])
                         let newValidValues = [...validValues];

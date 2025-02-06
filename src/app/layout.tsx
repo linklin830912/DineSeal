@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { ThemeSettingsProvider } from "@/context/theme-settings-context";
+import { RestaurantThemeSettingsProvider } from "@/context/restaurant-theme-settings-context";
 import { MemoryLaneStateProvider } from "@/context/memory-lane-state-context";
 import { TouchScreenProvider } from "@/context/touch-screen-context";
 
@@ -40,13 +39,13 @@ export default function RootLayout({
       <body
         className={"antialiased"}>
         
-          <ThemeSettingsProvider>
+          <RestaurantThemeSettingsProvider>
             <MemoryLaneStateProvider>
                 <TouchScreenProvider>
                     {children}
                 </TouchScreenProvider>            
             </MemoryLaneStateProvider>
-          </ThemeSettingsProvider>
+          </RestaurantThemeSettingsProvider>
         
       </body>
     </html>

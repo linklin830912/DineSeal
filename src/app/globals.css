@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -32,7 +33,7 @@
   --pageButton0Color: #B7D9FC;
 }
 
-[data-theme='dark'] {
+/* [data-theme='dark'] {
   --background: #ffffff;
   --foreground: #171717;
   --primary-color: #1d4ed8;
@@ -61,7 +62,7 @@
   --pageBackgroundMaskColor: #3538f589;
   --pageSvgPath0Color: #8BB8E8;
   --pageButton0Color: #B7D9FC;
-}
+} */
 
 
 
