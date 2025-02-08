@@ -1,4 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { RxCross2 } from "react-icons/rx";
+import { MdOutlineAddAPhoto } from "react-icons/md";
+import { MdOutlineSettingsBackupRestore } from "react-icons/md";
+import { IoIosSave } from "react-icons/io";
+
 enum CameraStateEnum {
   TAKEING_PHOTO,
   PREVIEWING_PHOTO,
@@ -101,15 +106,20 @@ export default function Camera(props: CameraProps) {
     return (
       <div ref={divRef}
         className={`w-full h-full absolute left-0 top-0 flex justify-center items-center overflow-hidden ${window.innerWidth <= 768 ? "max-h-[720px]" : ""}`}>
-        <button className='absolute left-1 top-1 text-white z-30' onClick={handleCameraClose}>close</button>
+        <button className='absolute left-1 top-1 z-30' onClick={handleCameraClose}><RxCross2 size={20} className='fill-svgStrokeColor0'/></button>
         <video ref={videoRef} autoPlay className={ `${cameraState===CameraStateEnum.TAKEING_PHOTO ? "" : "hidden"} absolute left-0 top-0`} />
         <canvas ref={canvasRef} />
         {/* <img ref={imageRef}/> */}
           <div className="w-full absolute bottom-10 flex justify-center items-center flex-row">
-          <button onClick={handleCameraClick} className='w-[50px] h-[50px] bg-white rounded-[50%]'></button>
+          <button onClick={handleCameraClick} className='p-3 border-2 border-svgStrokeColor0 bg-fontColor0 rounded-[50%]'>
+            <MdOutlineAddAPhoto size={30} className='fill-svgStrokeColor0'/>
+          </button>
           {cameraState === CameraStateEnum.PREVIEWING_PHOTO && <div className='flex flex-col'>           
-              <button onClick={handleCameraRefresh} className='w-[30px] h-[30px] bg-white rounded-[50%]'></button>            
-              <button onClick={handleCameraSave} className='w-[30px] h-[30px] bg-white rounded-[50%]'></button>
+            <button onClick={handleCameraRefresh} className='p-1 mb-3 bg-fontColor0 rounded-[50%]'>
+              <MdOutlineSettingsBackupRestore size={20} className='fill-svgStrokeColor0' /></button>            
+            <button onClick={handleCameraSave} className='p-1 bg-fontColor0 rounded-[50%]'>
+              <IoIosSave size={20} className='fill-svgStrokeColor0'/>
+            </button>
           </div>}
           
           </div>

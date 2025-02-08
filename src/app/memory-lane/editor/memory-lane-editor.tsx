@@ -13,8 +13,9 @@ import { POST_COMMENTING } from '@/api/comments/postCommentingWithDiaryId';
 import { useMutation } from '@apollo/client';
 import { uploadImageFromCanvas } from '@/api/image/uploadImage';
 import { useRouter } from 'next/navigation';
-import { mapToCommenting, mapToCommentings } from '@/mapper/mapToCommentings';
+import { mapToCommenting } from '@/mapper/mapToCommentings';
 import ThankyouNote from '@/components/svg/thankyou-note';
+import { RxCross2 } from 'react-icons/rx';
 
 export enum MemoryLaneEditorStateEnum {
     CAMERA,
@@ -40,25 +41,10 @@ export default function MemoryLaneEditor() {
     const router = useRouter();
 
     const handleEditorClose = () => {
-        if (setState) setState(MemoryLaneStateEnum.BrowseComments);
+        if (setState) setState(MemoryLaneStateEnum.BROWSE_COMMENTS);
         router?.push('/memory-lane');
     }
-    const handleShare = async () => {
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: "Check this out!",
-                    text: "Here's something interesting to look at.",
-                    url: window.location.href, // You can replace this with any URL
-                });
-                console.log("Content shared successfully!");
-            } catch (error) {
-                console.error("Error sharing content:", error);
-            }
-        } else {
-            alert("Sharing is not supported on this device/browser.");
-        }
-    };
+  
     const [insertCommenting] = useMutation<any, any>(POST_COMMENTING);
 
     const handleSubmit = async() => { 
@@ -89,47 +75,47 @@ export default function MemoryLaneEditor() {
     }
 
     return (
-        <div className='w-full h-[100vh] relative flex flex-row justify-center items-center bg-gradient-to-b from-mainBackgroundLinear0Color to-mainBackgroundLinear1Color'>
-            <div className='w-full h-full top-0 left-0 absolute bg-pageBackgroundMaskColor flex flex-col justify-center items-center z-30'>
+        <div className='w-full h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-backgroundColor0 to-backgroundColor1'>
                 {editorState === MemoryLaneEditorStateEnum.DONE && (commentings?.length || 0) > 0 && (commentings?.length || 0) % 10 === 0
                     && <div className='w-[70%]'> <ThankyouNote /></div>}
-                <div className='w-full flex flex-row justify-center items-end mb-2'>
+                <div className='w-full h-full flex flex-row justify-center items-end mb-2'>
                     <MapIcon />
-                    <div className='text-h4 text-fontSecondary0Color'>
+                    <div className='text-h4 text-fontColor0'>
                         {restaurant?.restaurantName.toUpperCase()}
                     </div>                
                 </div>
-                <div className='w-[80%] h-auto rounded-xl p-2 bg-pageBackgroundColor flex flex-col justify-start items-center'>                    
-                {editorState === MemoryLaneEditorStateEnum.CAMERA && <CameraEditor setImageTaken={setImageTaken}
-                    setEditorState={setEditorState} />}                         
-                {editorState === MemoryLaneEditorStateEnum.MAKE_COMMENTS && imageTaken && <CommentingEditor
-                    imageTaken={imageTaken} newCommenting={newCommenting} setNewCommenting={setNewCommenting}/>}
-                {editorState === MemoryLaneEditorStateEnum.MAKE_FEEDBACK && <FeedbackEditor
-                    imageTaken={imageTaken} newCommenting={newCommenting}setNewCommenting={setNewCommenting} />}
-                {editorState === MemoryLaneEditorStateEnum.CONSENT_RIGHTS && <ConsentEditor
-                    imageTaken={imageTaken} newCommenting={newCommenting} setNewCommenting={setNewCommenting} setIsAgreed={setIsAgreed} />}
-                    {editorState === MemoryLaneEditorStateEnum.DONE && <div className='text-fontSecondary1Color text-h6 text-center'>
+            
+                <div className='w-4/5 h-fit rounded-xl bg-backgroundColor0 border-4 border-fontColor0 flex flex-col'>                    
+                    {editorState === MemoryLaneEditorStateEnum.CAMERA && <CameraEditor setImageTaken={setImageTaken}
+                        setEditorState={setEditorState} />}                         
+                    {editorState === MemoryLaneEditorStateEnum.MAKE_COMMENTS && imageTaken && <CommentingEditor
+                        imageTaken={imageTaken} newCommenting={newCommenting} setNewCommenting={setNewCommenting}/>}
+                    {editorState === MemoryLaneEditorStateEnum.MAKE_FEEDBACK && <FeedbackEditor
+                        imageTaken={imageTaken} newCommenting={newCommenting}setNewCommenting={setNewCommenting} />}
+                    {editorState === MemoryLaneEditorStateEnum.CONSENT_RIGHTS && <ConsentEditor
+                        imageTaken={imageTaken} newCommenting={newCommenting} setNewCommenting={setNewCommenting} setIsAgreed={setIsAgreed} />}
+                    {editorState === MemoryLaneEditorStateEnum.DONE && <div className='bg-backgroundColor2 text-fontColor1 text-h6 text-center p-3'>
                         <div>Thank you. Your feedback is appreciated!</div>
                         { newCommenting?.appreciation && <div>You just earned one extra point.</div>}
                     </div>}
                 </div>            
                 
-                <div className='w-full mt-5 flex flex-row justify-center items-center'>
-                    <button onClick={handleEditorClose}><CrossIcon /></button>
+                <div className='w-full h-full mt-3 flex flex-row justify-center items-start'>
+                    <button onClick={handleEditorClose}><RxCross2 size={30} strokeWidth={"1px"} className='fill-fontColor0 stroke-fontColor0'/></button>
                     {editorState === MemoryLaneEditorStateEnum.MAKE_COMMENTS &&
                         <>
-                            <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1'onClick={() => { 
+                            <button className='bg-buttonColor0 text-fontColor0 rounded-xl ml-2 text-h6 px-2 py-1'onClick={() => { 
                                 if(newCommenting?.title && newCommenting?.description)
                                     setEditorState(MemoryLaneEditorStateEnum.CONSENT_RIGHTS)
                                 }}> SAVE </button>
-                            <button className='bg-mainButton1Color rounded-xl ml-2 text-h6 px-5 py-1' onClick={() => { 
+                            <button className='bg-buttonColor1 text-fontColor0 rounded-xl ml-2 text-h6 px-2 py-1' onClick={() => { 
                                 if(newCommenting?.title && newCommenting?.description)
                                     setEditorState(MemoryLaneEditorStateEnum.MAKE_FEEDBACK)
                                 }}> ADD APPRECIATION </button>
                         </>                     
                     }
                     {editorState === MemoryLaneEditorStateEnum.MAKE_FEEDBACK &&
-                        <button className='bg-mainButton1Color rounded-xl ml-5 text-h6 px-5 py-1'
+                        <button className='bg-buttonColor0 rounded-xl ml-5 text-h6 px-5 py-1'
                             onClick={() => { 
                                 if(newCommenting?.appreciation)
                                     setEditorState(MemoryLaneEditorStateEnum.CONSENT_RIGHTS)
@@ -137,7 +123,7 @@ export default function MemoryLaneEditor() {
                         > SAVE </button>
                     }
                     {editorState === MemoryLaneEditorStateEnum.CONSENT_RIGHTS &&
-                        <button className='bg-mainButton1Color rounded-xl ml-5 text-h6 px-5 py-1'
+                        <button className='bg-buttonColor0 rounded-xl ml-5 text-h6 px-5 py-1'
                             onClick={() => { 
                                 if(isAgreed)
                                     setEditorState(MemoryLaneEditorStateEnum.DONE)
@@ -145,9 +131,7 @@ export default function MemoryLaneEditor() {
                                 }}
                         > SUBMIT </button>
                     }
-                </div>
-                     
-            </div>   
+                </div>                     
         </div>     
     );
 }

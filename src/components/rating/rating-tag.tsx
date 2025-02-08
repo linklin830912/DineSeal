@@ -15,15 +15,15 @@ export default function RatingTag(props: RatingTagProps) {
     }
     return <div className="w-full flex flex-col">
         <div className="w-full flex relative flex-col">
-            <input className="w-full border border-s-fontMainColor px-1 placeholder:text-fontMainPaceholderColor focus:outline-none focus:border-s-fontMainHoverColor text-h6"
+            <input className="w-full border-2 border-svgStrokeColor0 px-2 py-1 focus:outline-none text-h4 rounded-md"
                 placeholder="What do you eat?"
                 onFocus={() => { setIsOpen(true) }}
                 onChange={handleInputChange}
             />
-        {isOpen && <ul className="absolute w-full bg-pageBackgroundSecondary1Color top-[20px] text-h5">{
+        {isOpen && <ul className="absolute w-full bg-backgroundColor0 top-[35px] text-h4">{
             validValues.map((x, index) => <li className="w-full"
                 key={index}  ><button value={x}
-                    className="w-full pl-1 py-1 text-fontColor0 text-left text-h5"
+                    className="w-full px-2 py-1 text-fontColor0 text-left text-h4 shadow-[0_2px_0px_0] shadow-fontColor0"
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                         setTags([...tags, x])
                         let newValidValues = [...validValues];
@@ -34,8 +34,8 @@ export default function RatingTag(props: RatingTagProps) {
             }
         </ul>}
         </div>
-        <div className="w-full flex flex-row mt-2 flex-wrap">{
-            tags.map((tag, index) => <div className="px-3 py-1 mb-1 mr-1 rounded-[50px] bg-pageSvgPath0Color text-h6" key={index}>{ tag.toUpperCase() }</div>)
+        <div className="w-full flex mt-1 flex-wrap">{
+            tags.map((tag, index) => <div className="px-2 py-1 mb-1 mr-1 rounded-[50px] bg-buttonColor0 text-h6" key={index}>{ tag.toUpperCase() }</div>)
         }</div>
         
     </div>

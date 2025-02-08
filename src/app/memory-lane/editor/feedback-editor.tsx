@@ -40,29 +40,29 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
         if(props.setNewCommenting)props.setNewCommenting({ ...props.newCommenting, tags: tagIndexs} as Commenting)
     }
 
-    return <>
+    return <div className="relative h-full bg-backgroundColor2 flex flex-col">
         
         <div className="w-full mb-2">
-            <div className="w-full text-fontMainColor text-h6 mb-1">FEEDBACK</div> 
+            <div className="w-full text-fontColor1 text-h6 mb-1">FEEDBACK</div> 
             <canvas className="w-full rounded-md" ref={canvasRef} /> 
         </div>
         
         <div className="w-full mb-2">
-            <div className="w-full text-fontMainColor text-h6 mb-1">RATING</div>
+            <div className="w-full text-fontColor1 text-h6 mb-1">RATING</div>
             <RatingStar totalStars={5} handleStarSelected={handleStarSelected} />
         </div>
-        <div className="w-full mb-0">
-            <div className="w-full text-fontMainColor text-h6 mb-1">TAGS</div>
+        <div className="w-full mb-2">
+            <div className="w-full text-fontColor1 text-h6 mb-1">TAGS</div>
             <RatingTag values={restaurant?.menu || [] as string[]} handleTagSelected={handleTagSelected}/>
         </div>
-        <div className="w-full mb-[-50px]">
-            <div className="w-full text-fontMainColor text-h6 mb-1">APPRICIATION</div> 
-            <textarea className='w-full min-h-[120px] px-1 rounded-md text-fontMainColor bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h6 focus:outline-none focus:ring-0'
+        <div className="w-full">
+            <div className="w-full text-fontColor1 text-h6">APPRICIATION</div> 
+            <textarea className='w-full px-2 py-1 rounded-md text-fontColor1 bg-buttonColor2 text-h4 focus:outline-none'
                 placeholder='Anything to say to the restaurant owner?' onChange={handleApprciationChange} />
         </div>       
         
-        <div className='relative w-[50px] h-[50px] top-[-95%] right-[-50%]'><Badge/></div>    
-    </>
+        <div className='absolute w-[50px] h-[50px] top-[-25px] right-[-25px]'><Badge/></div>    
+    </div>
 }
 
 

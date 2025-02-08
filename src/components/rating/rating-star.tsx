@@ -20,7 +20,7 @@ export default function RatingStar(props: RatingStarProps) {
     }, [selectStars])
 
     return <div className="w-full">
-        <div className="w-full flex flex-row justify-between items-center px-1">            
+        <div className="w-full flex justify-between items-center px-1">            
             {isSelectList.map((x, buttonIndex) =>
                 <button key={buttonIndex} className="w-[20px] h-[20px] mr-2"
                     onClick={() => {

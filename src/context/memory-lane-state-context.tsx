@@ -5,9 +5,8 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 import { Commenting } from '@/model/Commenting';
 import { Restaurant } from '@/model/Restaurant';
 export enum MemoryLaneStateEnum { 
-    BrowseComments,
-    EditComment,
-    ReadComment
+    BROWSE_COMMENTS,
+    EDIT_COMMENT
 }
 
 interface MemoryLaneState {
@@ -19,8 +18,6 @@ interface MemoryLaneState {
     setCommentings: (comments: Commenting[]) => void
     diaryId: number,
     setDiaryId: (diaryId: number) => void
-    theme: ThemeSettings
-    setTheme:(theme: ThemeSettings) => void
 }
 
 // Create the context with an initial empty state
@@ -28,12 +25,10 @@ const MemoryLaneStateContext = createContext<MemoryLaneState | undefined>(undefi
 
 // Create a provider component
 export const MemoryLaneStateProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, setState] = useState<MemoryLaneStateEnum>(MemoryLaneStateEnum.BrowseComments);
+  const [state, setState] = useState<MemoryLaneStateEnum>(MemoryLaneStateEnum.BROWSE_COMMENTS);
   const [restaurant, setRestaurant] = useState<Restaurant | undefined>();
   const [commentings, setCommentings] = useState<Commenting[]>([]);
   const [diaryId, setDiaryId] = useState<number>(-1);
-  const initTheme = themeSwitch(CustomerSettingsThemeEnum.LIGHT);
-  const [theme, setTheme] = useState<ThemeSettings>(initTheme);
 
   useEffect(() => {
     const storedRestaurantData = localStorage.getItem('restaurant');
@@ -78,9 +73,7 @@ export const MemoryLaneStateProvider: React.FC<{ children: ReactNode }> = ({ chi
       commentings: commentings,
       setCommentings: setCommentings,
       diaryId: diaryId,
-      setDiaryId: setDiaryId,
-      theme: theme,
-      setTheme: setTheme,
+      setDiaryId: setDiaryId
     }}>
       {children}
     </MemoryLaneStateContext.Provider>

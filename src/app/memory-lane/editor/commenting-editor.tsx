@@ -28,13 +28,16 @@ export default function CommentingEditor(props:CommetingEditorProps) {
     }
     }
 
-    return <>    
-        <canvas className="w-full" ref={canvasRef}/> 
-        <input className='w-full mt-2 text-fontMainColor rounded-sm bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h5 focus:outline-none focus:ring-0 mb-1'
-            type='text' placeholder='TITLE' onChange={handleTitleChange}/>
-        <textarea className='w-full min-h-[120px] rounded-md px-1 text-fontMainColor bg-pageBackgroundSecondary1Color placeholder:text-fontMainPaceholderColor text-h6 focus:outline-none focus:ring-0'
-            placeholder='Caption your memory?' onChange={handleDescriptionChange} />
-    </>
+    return <div className="relative h-full flex flex-col bg-backgroundColor2">    
+        <canvas className="w-full rounded-md mb-2" ref={canvasRef} /> 
+        <div className="w-full">
+            <input className='w-full text-fontColor1 rounded-md bg-buttonColor2 text-h4 px-2 py-1 focus:outline-none mb-2'
+                type='text' placeholder='TITLE' onChange={handleTitleChange}/>
+            <textarea className='w-full min-h-20 text-fontColor1 rounded-md bg-buttonColor2 text-h4 px-2 py-1 focus:outline-none'
+                placeholder='Caption your memory?' onChange={handleDescriptionChange} />
+        </div>
+        
+    </div>
 }
 
 

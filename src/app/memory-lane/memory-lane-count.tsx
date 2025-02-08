@@ -5,13 +5,13 @@ import React from "react";
 export default function MemoryLaneCount() { 
     const {commentings} = useMemoryLaneState();
     return (
-        <div className="w-full flex flex-row justify-center items-center">
-            <div className="bg-mainButton0Color w-fit px-3 py-1 mb-5 text-h6 rounded-[50px] mr-1">
+        <div className="w-full h-full flex justify-center items-center">
+            <div className="bg-buttonColor0 px-2 py-1 text-h6 rounded-[50px] mr-2">
                 {`MEMORIES : ${commentings?.length}`}</div>
-            <div className="bg-mainButton1Color w-fit px-2 py-1 mb-5 text-h6 rounded-[50px] flex flex-row justify-center items-center">
+            <div className="bg-buttonColor1 px-2 py-1 text-h6 rounded-[50px] flex justify-center items-center">
                 <div className="w-[15px] mr-1"><BadgeIcon/></div>                
-                <div>{`${commentings?.filter(x=>x.appreciation!=="").length}`}</div>
+                <div>{`${commentings?.filter((x)=>x.appreciation!=="").length}`}</div>
             </div>
         </div>
-    );  // end of return statement
+    );
 }
