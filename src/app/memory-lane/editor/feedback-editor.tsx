@@ -5,6 +5,7 @@ import RatingTag from "@/components/rating/rating-tag";
 import { EditorProp } from "./memory-lane-editor";
 import Badge from "@/components/svg/badge";
 import { Commenting } from "@/model/Commenting";
+import { useRestaurantThemeSettings } from "@/context/restaurant-theme-settings-context";
 
 type FeedbackEditorProps = EditorProp;
 export default function FeedbackEditor(props: FeedbackEditorProps) {
@@ -39,27 +40,28 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
         });
         if(props.setNewCommenting)props.setNewCommenting({ ...props.newCommenting, tags: tagIndexs} as Commenting)
     }
+    const { restaurantThemeSettings } = useRestaurantThemeSettings();
 
     return <div className="relative h-full bg-backgroundColor2 flex flex-col">
         
         <div className="w-full mb-2">
-            <div className="w-full text-fontColor1 text-h6 mb-1">FEEDBACK</div> 
+            <div className="w-full text-fontColor1 text-h6 mb-1">{restaurantThemeSettings.editor.feedbackLabel}</div> 
             <canvas className="w-full rounded-md" ref={canvasRef} /> 
         </div>
         
-        <div className="w-full mb-2">
-            <div className="w-full text-fontColor1 text-h6 mb-1">RATING</div>
+        {restaurantThemeSettings.editor.haveRating && <div className="w-full mb-2">
+            <div className="w-full text-fontColor1 text-h6 mb-1">{restaurantThemeSettings.editor.ratingLabel}</div>
             <RatingStar totalStars={5} handleStarSelected={handleStarSelected} />
-        </div>
-        <div className="w-full mb-2">
-            <div className="w-full text-fontColor1 text-h6 mb-1">TAGS</div>
+        </div>}
+        {restaurantThemeSettings.editor.haveTags && <div className="w-full mb-2">
+            <div className="w-full text-fontColor1 text-h6 mb-1">{restaurantThemeSettings.editor.tagsLabel}</div>
             <RatingTag values={restaurant?.menu || [] as string[]} handleTagSelected={handleTagSelected}/>
-        </div>
-        <div className="w-full">
-            <div className="w-full text-fontColor1 text-h6">APPRICIATION</div> 
+        </div>}
+        {restaurantThemeSettings.editor.haveAppreciations && <div className="w-full">
+            <div className="w-full text-fontColor1 text-h6">{restaurantThemeSettings.editor.appreciationsText}</div> 
             <textarea className='w-full px-2 py-1 rounded-md text-fontColor1 bg-buttonColor2 text-h4 focus:outline-none'
                 placeholder='Anything to say to the restaurant owner?' onChange={handleApprciationChange} />
-        </div>       
+        </div>}       
         
         <div className='absolute w-[50px] h-[50px] top-[-25px] right-[-25px]'><Badge/></div>    
     </div>

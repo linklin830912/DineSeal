@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { EditorProp } from "./memory-lane-editor";
 import { Commenting } from "@/model/Commenting";
+import { useRestaurantThemeSettings } from "@/context/restaurant-theme-settings-context";
 
 type CommetingEditorProps = EditorProp;
 export default function CommentingEditor(props:CommetingEditorProps) { 
@@ -27,14 +28,14 @@ export default function CommentingEditor(props:CommetingEditorProps) {
             if(props.setNewCommenting)props.setNewCommenting({...props.newCommenting, description: e.target.value}as Commenting);
     }
     }
-
+    const { restaurantThemeSettings } = useRestaurantThemeSettings();
     return <div className="relative h-full flex flex-col bg-backgroundColor2">    
         <canvas className="w-full rounded-md mb-2" ref={canvasRef} /> 
         <div className="w-full">
-            <input className='w-full text-fontColor1 rounded-md bg-buttonColor2 text-h4 px-2 py-1 focus:outline-none mb-2'
-                type='text' placeholder='TITLE' onChange={handleTitleChange}/>
-            <textarea className='w-full min-h-20 text-fontColor1 rounded-md bg-buttonColor2 text-h4 px-2 py-1 focus:outline-none'
-                placeholder='Caption your memory?' onChange={handleDescriptionChange} />
+            {restaurantThemeSettings.editor.haveTitle && <input className='w-full text-fontColor1 rounded-md bg-buttonColor2 text-h4 px-2 py-1 focus:outline-none mb-2'
+                type='text' placeholder={restaurantThemeSettings.editor.titleText} onChange={handleTitleChange}/>}
+            {restaurantThemeSettings.editor.haveCaptions && <textarea className='w-full min-h-20 text-fontColor1 rounded-md bg-buttonColor2 text-h4 px-2 py-1 focus:outline-none'
+                placeholder={restaurantThemeSettings.editor.captionsText} onChange={handleDescriptionChange} />}
         </div>
         
     </div>

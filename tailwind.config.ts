@@ -9,34 +9,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: 'var(--primary-color)',
-        secondary: 'var(--secondary-color)',
-
-        fontMainColor: 'var(--fontMainColor)',
-        fontSecondary0Color: 'var(--fontSecondary0Color)',
-        fontSecondary1Color: 'var(--fontSecondary1Color)',
-        fontMainPaceholderColor: 'var(--fontMainPaceholderColor)',
-        fontMainHoverColor: 'var(--fontMainHoverColor)',
-        fontSecondary0HoverColor: 'var(--fontSecondary0HoverColor)',
-        fontSecondary1HoverColor: 'var(--fontSecondary1HoverColor)',
-
-        mainBackgroundLinear0Color: 'var(--mainBackgroundLinear0Color)',
-        mainBackgroundLinear1Color: 'var(--mainBackgroundLinear1Color)',
-        mainSvgPath0Color: 'var(--mainSvgPath0Color)',
-        mainSvgPath1Color: 'var(--mainSvgPath1Color)',
-        mainButton0Color: 'var(--mainButton0Color)',
-        mainButton1Color: 'var(--mainButton1Color)',
-        mainButton1SecondaryColor: 'var(--mainButton1SecondaryColor)',
-
-        pageBackgroundColor: 'var(--pageBackgroundColor)',
-        pageBackgroundSecondary0Color: 'var(--pageBackgroundSecondary0Color)',
-        pageBackgroundSecondary1Color: 'var(--pageBackgroundSecondary1Color)',
-        pageBackgroundMaskColor: 'var(--pageBackgroundMaskColor)',
-        pageSvgPath0Color: 'var(--pageSvgPath0Color)',
-        pageButton0Color: 'var(--pageButton0Color)',
-/////////////////
         backgroundColor0: 'var(--backgroundColor0)',
         backgroundColor1: 'var(--backgroundColor1)',
         backgroundColor2: 'var(--backgroundColor2)',

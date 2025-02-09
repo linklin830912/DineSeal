@@ -49,7 +49,6 @@ export default function MemoryLaneEditor() {
 
     const handleSubmit = async() => { 
         try {
-            console.log("submit diaryId ", diaryId)
             if (diaryId < 0) return;
             const result = await insertCommenting({
             variables: {
@@ -62,7 +61,6 @@ export default function MemoryLaneEditor() {
                 title: newCommenting?.title,
                 }
             })
-            console.log("result ", result)
             const resultComment = result.data?.insert_commenting.returning[0];
             if (resultComment?.image_id && imageTaken) {
                 uploadImageFromCanvas(`${resultComment?.image_id}.png`, imageTaken);

@@ -7,10 +7,11 @@ import MemoryLaneCount from "../memory-lane-count";
 import { mapStringToDate } from "@/mapper/mapDate";
 import Image from "next/image";
 import { TbSwitchHorizontal } from "react-icons/tb";
+import { useRestaurantThemeSettings } from "@/context/restaurant-theme-settings-context";
 export default function MemoryLaneHistory() { 
     const { commentings } = useMemoryLaneState();
     const [showCardCommenting, setShowCardCommenting] = useState<Commenting | null>(null);
-    return <div className='w-full h-[100vh] bg-gradient-to-b from-backgroundColor0 to-backgroundColor1'>   
+    return <div className='w-full h-full bg-gradient-to-b from-backgroundColor0 to-backgroundColor1'>   
         <div className='w-full h-full flex flex-col py-5'>
             <div className='w-full h-1/6'>
                 <MemoryLaneHeader title='MEMORY LANE' state={MemoryLaneHeaderStateEnum.MAIN} goBackRoute='/memory-lane' />
@@ -64,13 +65,12 @@ type HistoryDetailCardProps = {
     handleShowCardIndex:()=>void
 }
 function HistoryDetailCard(props: HistoryDetailCardProps) {
+    const { restaurantThemeSettings } = useRestaurantThemeSettings();
     const formattedDate = mapStringToDate(props.commenting.createTime ? props.commenting.createTime : "");
     return <div className="w-full h-fit px-3 py-5 flex flex-col">
-        <div className="w-full flex justify-center items-center">{formattedDate && 
-            <div className="text-fontColor0 text-h6 font-light">
-                {`${formattedDate.day}.${formattedDate.month}.${formattedDate.year}, ${formattedDate.hours}:${formattedDate.minutes} ${formattedDate.AMPM}`}
-            </div>}
-        </div>
+        {formattedDate && restaurantThemeSettings.history.haveDate && <div className="w-full text-center text-fontColor0 text-h6 font-light">
+            {`${formattedDate.day}.${formattedDate.month}.${formattedDate.year}, ${formattedDate.hours}:${formattedDate.minutes} ${formattedDate.AMPM}`}
+        </div>}
         
         <div className="w-full rounded-md bg-backgroundColor2 border-4 p-2 border-backgroundColor2" onClick={props.handleShowCardIndex}>
             <div className="w-full relative rounded-sm mb-2 ">
@@ -82,8 +82,8 @@ function HistoryDetailCard(props: HistoryDetailCardProps) {
                 </div>
             </div>
             <div className="flex flex-col justify-start items-start">
-                <div className="text-fontMainColor text-h5 mb-1 text-start">{props.commenting.title}</div>
-                <div className="text-fontMainColor text-h6 mb-1 text-start">{props.commenting.description}</div>
+                {restaurantThemeSettings.history.haveTitle && <div className="text-fontColor1 text-h5 mb-1 text-start">{props.commenting.title}</div>}
+                {restaurantThemeSettings.history.haveCaption && <div className="text-fontColor1 text-h6 mb-1 text-start">{props.commenting.description}</div>}
             </div>
         </div>
     </div>;
