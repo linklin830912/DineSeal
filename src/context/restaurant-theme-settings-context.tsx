@@ -20,9 +20,6 @@ export const RestaurantThemeSettingsProvider: React.FC<{ children: ReactNode }> 
     const [restaurantThemeSettings, setRestaurantThemeSettings] = useState<RestaurantThemeSettings>(DEFAULT_RESTAURANT_THEME_SETTINGS);
 
     useEffect(() => {
-        // document.documentElement.setAttribute('data-theme', restaurantThemeSettings);
-        // localStorage.setItem('theme', restaurantThemeSettings);
-console.log("!!!REST", restaurantThemeSettings)
         const colorTHemeSettings = themeSwitch(restaurantThemeSettings.main.colorThemeEnum);
         Object.entries(colorTHemeSettings).forEach(([key, value]) => {
             document.documentElement.style.setProperty(`--${key}`, value);

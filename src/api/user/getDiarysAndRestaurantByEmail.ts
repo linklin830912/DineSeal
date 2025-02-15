@@ -32,16 +32,17 @@ query getDiaryByUserId($userUuid: uuid) {
 export function getDiarysAndRestaurantByEmail(email: string) { 
   
   const { data: userData } = useQuery(GET_DIARY_USER_ID_BY_EMAIL, {
-        variables: {
-            email: email
-        }
+    variables: {
+      email: email
+    },
+    fetchPolicy: 'cache-first',
   });
 
   const [fetchDiary, { data: diaryData }] =
-    useLazyQuery(GET_DIARY_BY_USER_UUID);
+    useLazyQuery(GET_DIARY_BY_USER_UUID, {fetchPolicy: 'cache-first'});
   
   const [fetchRestaurants, { data: restaurantsData }] =
-    useLazyQuery(GET_RESTAURANTS_BY_IDS);
+    useLazyQuery(GET_RESTAURANTS_BY_IDS, {fetchPolicy: 'cache-first'});
 
   useEffect(() => {
     if (userData) {

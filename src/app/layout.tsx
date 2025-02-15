@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={"antialiased"}>
+        className="bg-gradient-to-b from-backgroundColor0 to-backgroundColor1">
         
           <RestaurantThemeSettingsProvider>
             <MemoryLaneStateProvider>

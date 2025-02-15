@@ -1,3 +1,4 @@
+import { client } from "@/apollo/client";
 import BadgeIcon from "@/components/svg/badge-icon";
 import { useMemoryLaneState } from "@/context/memory-lane-state-context";
 import React from "react";

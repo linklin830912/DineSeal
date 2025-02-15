@@ -6,12 +6,11 @@ import { Commenting } from "@/model/Commenting";
 import MemoryLaneCount from "../memory-lane-count";
 import { mapStringToDate } from "@/mapper/mapDate";
 import Image from "next/image";
-import { TbSwitchHorizontal } from "react-icons/tb";
 import { useRestaurantThemeSettings } from "@/context/restaurant-theme-settings-context";
 export default function MemoryLaneHistory() { 
     const { commentings } = useMemoryLaneState();
     const [showCardCommenting, setShowCardCommenting] = useState<Commenting | null>(null);
-    return <div className='w-full h-full bg-gradient-to-b from-backgroundColor0 to-backgroundColor1'>   
+    return <div className='w-full h-full'>   
         <div className='w-full h-full flex flex-col py-5'>
             <div className='w-full h-1/6'>
                 <MemoryLaneHeader title='MEMORY LANE' state={MemoryLaneHeaderStateEnum.MAIN} goBackRoute='/memory-lane' />

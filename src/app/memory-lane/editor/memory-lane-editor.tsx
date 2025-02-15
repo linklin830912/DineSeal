@@ -73,7 +73,7 @@ export default function MemoryLaneEditor() {
     }
 
     return (
-        <div className='w-full h-[100vh] flex flex-col justify-center items-center bg-gradient-to-b from-backgroundColor0 to-backgroundColor1'>
+        <div className='w-full h-[100vh] flex flex-col justify-center items-center'>
                 {editorState === MemoryLaneEditorStateEnum.DONE && (commentings?.length || 0) > 0 && (commentings?.length || 0) % 10 === 0
                     && <div className='w-[70%]'> <ThankyouNote /></div>}
                 <div className='w-full h-full flex flex-row justify-center items-end mb-2'>

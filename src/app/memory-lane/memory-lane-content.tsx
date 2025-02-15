@@ -2,7 +2,7 @@
 import { useMemoryLaneState } from '@/context/memory-lane-state-context';
 import MemoryLanePath from './memory-lane-path';
 import MemoryLaneHeader, { MemoryLaneHeaderStateEnum } from './memory-lane-header';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import MemoryLaneCount from './memory-lane-count';
 import { useLazyQuery} from '@apollo/client';
 import { getDiarysAndRestaurantByEmail} from '@/api/user/getDiarysAndRestaurantByEmail';
@@ -10,7 +10,6 @@ import { GET_COMMENTS_BY_DIARY_ID } from '@/api/comments/getCommentsByDiaryId';
 import { mapToCommentings } from '@/mapper/mapToCommentings';
 import { GET_RESTAURANT_THEME_SETTINGS_BY_RESTAURANT_ID } from '@/api/restaurant-theme-settings/getRestaurantTemeSettings';
 import { useRestaurantThemeSettings } from '@/context/restaurant-theme-settings-context';
-import { mapToRestaurant } from '@/mapper/mapToRestaurant';
 import { mapToRestaurantThemeSettings } from '@/mapper/mapToRestaurantThemeSettings';
 export default function MemoryLaneContent() { 
     const { setCommentings, setRestaurant, setDiaryId, restaurant } = useMemoryLaneState();
@@ -18,8 +17,8 @@ export default function MemoryLaneContent() {
 
     const { diarys, restaurants } = getDiarysAndRestaurantByEmail("test.user@mail.com");
 
-    const [fetchCommentings, { data: commentingData }] = useLazyQuery(GET_COMMENTS_BY_DIARY_ID);
-    const [fetchRestaurantThemeSettings, {data: restaurantThemeSettingsData}] = useLazyQuery(GET_RESTAURANT_THEME_SETTINGS_BY_RESTAURANT_ID);
+    const [fetchCommentings, { data: commentingData }] = useLazyQuery(GET_COMMENTS_BY_DIARY_ID, {fetchPolicy: 'cache-first'});
+    const [fetchRestaurantThemeSettings, {data: restaurantThemeSettingsData}] = useLazyQuery(GET_RESTAURANT_THEME_SETTINGS_BY_RESTAURANT_ID, {fetchPolicy: 'cache-first'});
 
     const handleRestaurantIdSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const diaryId = diarys?.filter(x => x.restaurantId === Number(e.target.value)).map(x => x.diaryId)[0];
@@ -29,7 +28,8 @@ export default function MemoryLaneContent() {
             setDiaryId(diaryId);
             fetchCommentings({ variables:{ diaryId: diaryId } });
         }
-        if (selectedRestaurant) { 
+        if (selectedRestaurant) {
+            console.log(selectedRestaurant.restaurantId)
             fetchRestaurantThemeSettings({ variables:{restaurantId: selectedRestaurant.restaurantId}})
         }
     }
@@ -48,7 +48,7 @@ export default function MemoryLaneContent() {
     }, [restaurantThemeSettingsData])
 
     return (
-        <div className='w-full h-[100vh] bg-gradient-to-b from-backgroundColor0 to-backgroundColor1'>
+        <div className='w-full h-[100vh]'>
             <div className='w-full h-full flex flex-col py-5'>
                 <div className='w-full h-1/6'>
                     <MemoryLaneHeader title='MEMORY LANE' state={MemoryLaneHeaderStateEnum.MAIN} goBackRoute='/' />
@@ -57,7 +57,7 @@ export default function MemoryLaneContent() {
                     <MemoryLanePath />
                 </div>                
                 <div className='w-full h-1/6'>
-                    <MemoryLaneCount />                    
+                    <MemoryLaneCount />                
                 </div> 
             </div>
 

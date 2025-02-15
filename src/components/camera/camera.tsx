@@ -82,14 +82,6 @@ export default function Camera(props: CameraProps) {
     if (canvasRef.current) { 
       const image = canvasRef.current;      
       props.setImageTaken(image);
-      // TODO: CDN have to be setup
-      // image.toBlob(async(blob) => { 
-      //   if (blob) { 
-      //     const arrayBuffer = await blob.arrayBuffer();
-      //     const buffer = Buffer.from(arrayBuffer);
-      //     uploadImage("newBlobName", buffer);
-      //   }
-      // }, "image/png")
     }
   }
   const handleCameraClose = () => { 
@@ -100,7 +92,6 @@ export default function Camera(props: CameraProps) {
       });
       setCameraStream(null);
       props.setIsOff(true);
-      
     }
   }
     return (
@@ -109,19 +100,17 @@ export default function Camera(props: CameraProps) {
         <button className='absolute left-1 top-1 z-30' onClick={handleCameraClose}><RxCross2 size={20} className='fill-svgStrokeColor0'/></button>
         <video ref={videoRef} autoPlay className={ `${cameraState===CameraStateEnum.TAKEING_PHOTO ? "" : "hidden"} absolute left-0 top-0`} />
         <canvas ref={canvasRef} />
-        {/* <img ref={imageRef}/> */}
           <div className="w-full absolute bottom-10 flex justify-center items-center flex-row">
           <button onClick={handleCameraClick} className='p-3 border-2 border-svgStrokeColor0 bg-fontColor0 rounded-[50%]'>
             <MdOutlineAddAPhoto size={30} className='fill-svgStrokeColor0'/>
           </button>
-          {cameraState === CameraStateEnum.PREVIEWING_PHOTO && <div className='flex flex-col'>           
+            {cameraState === CameraStateEnum.PREVIEWING_PHOTO && <div className='flex flex-col'>           
             <button onClick={handleCameraRefresh} className='p-1 mb-3 bg-fontColor0 rounded-[50%]'>
               <MdOutlineSettingsBackupRestore size={20} className='fill-svgStrokeColor0' /></button>            
             <button onClick={handleCameraSave} className='p-1 bg-fontColor0 rounded-[50%]'>
               <IoIosSave size={20} className='fill-svgStrokeColor0'/>
             </button>
-          </div>}
-          
+          </div>}          
           </div>
         </div>        
     );

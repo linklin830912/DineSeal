@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { EditorProp } from "./memory-lane-editor";
 import { useRestaurantThemeSettings } from "@/context/restaurant-theme-settings-context";
 type ConsentEditorProps = EditorProp & {setIsAgreed: (x:boolean)=>void};

@@ -60,7 +60,7 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
         {restaurantThemeSettings.editor.haveAppreciations && <div className="w-full">
             <div className="w-full text-fontColor1 text-h6">{restaurantThemeSettings.editor.appreciationsText}</div> 
             <textarea className='w-full px-2 py-1 rounded-md text-fontColor1 bg-buttonColor2 text-h4 focus:outline-none'
-                placeholder='Anything to say to the restaurant owner?' onChange={handleApprciationChange} />
+                placeholder={restaurantThemeSettings.editor.appreciationsText} onChange={handleApprciationChange} />
         </div>}       
         
         <div className='absolute w-[50px] h-[50px] top-[-25px] right-[-25px]'><Badge/></div>    
