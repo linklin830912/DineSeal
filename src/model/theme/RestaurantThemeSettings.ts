@@ -23,8 +23,9 @@ export type RestaurantThemeSettings = {
         tagsText:string,
         haveTags: boolean,
         tags: string[],
-        haveAppreciations: boolean,
+        appreciationsLabel:string,        
         appreciationsText: string,
+        haveAppreciations: boolean,
 
         noticeLabel: string,
         haveNotice: boolean,

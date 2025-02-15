@@ -29,6 +29,7 @@ export const DEFAULT_RESTAURANT_THEME_SETTINGS = {
         haveTags: true,
         tags: [""] as string[],
         haveAppreciations: true,
+        appreciationsLabel:"APPRECTIONS",
         appreciationsText: "What do you want to say to us?",
         noticeLabel: "WE MIGHT USE THIS INTO FOR OUR SOCIAL MEDIA",
         haveNotice: true,

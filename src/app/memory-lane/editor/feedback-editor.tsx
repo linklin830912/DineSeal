@@ -45,20 +45,20 @@ export default function FeedbackEditor(props: FeedbackEditorProps) {
     return <div className="relative h-full bg-backgroundColor2 flex flex-col">
         
         <div className="w-full mb-2">
-            <div className="w-full text-fontColor1 text-h6 mb-1">{restaurantThemeSettings.editor.feedbackLabel}</div> 
+            <div className="w-full text-fontColor1 text-h6 mb-1">{"FEEDBACKS"}</div> 
             <canvas className="w-full rounded-md" ref={canvasRef} /> 
         </div>
         
         {restaurantThemeSettings.editor.haveRating && <div className="w-full mb-2">
-            <div className="w-full text-fontColor1 text-h6 mb-1">{restaurantThemeSettings.editor.ratingLabel}</div>
+            <div className="w-full text-fontColor1 text-h6 mb-1">{"RATINGS"}</div>
             <RatingStar totalStars={5} handleStarSelected={handleStarSelected} />
         </div>}
         {restaurantThemeSettings.editor.haveTags && <div className="w-full mb-2">
-            <div className="w-full text-fontColor1 text-h6 mb-1">{restaurantThemeSettings.editor.tagsLabel}</div>
-            <RatingTag values={restaurant?.menu || [] as string[]} handleTagSelected={handleTagSelected}/>
+            <div className="w-full text-fontColor1 text-h6 mb-1">{"TAGS"}</div>
+            <RatingTag values={restaurantThemeSettings.editor.tags || [] as string[]} handleTagSelected={handleTagSelected}/>
         </div>}
         {restaurantThemeSettings.editor.haveAppreciations && <div className="w-full">
-            <div className="w-full text-fontColor1 text-h6">{restaurantThemeSettings.editor.appreciationsText}</div> 
+            <div className="w-full text-fontColor1 text-h6">{"APPRECIATIONS"}</div> 
             <textarea className='w-full px-2 py-1 rounded-md text-fontColor1 bg-buttonColor2 text-h4 focus:outline-none'
                 placeholder={restaurantThemeSettings.editor.appreciationsText} onChange={handleApprciationChange} />
         </div>}       
